@@ -68,8 +68,11 @@
                  Gestion
                </li>
               <li class="nav-item">
-                <a class="nav-link   {{ request()->is('/clientes') ? 'active' : '' }}
-                  {{ request()->is('/clientes') ? 'active' : '' }}" href="{{route('clientes.index')}}" ><i class="icon-speedometer"></i> <i class="fa fa-user"></i> Clientes </a>
+                <a class="nav-link
+                {{ request()->is('clientes') ? 'active' : '' }}
+                {{ request()->is('cliente/*') ? 'active' : '' }}
+                {{ request()->is('clientes/create') ? 'active' : '' }}
+                  " href="{{route('clientes.index')}}" ><i class="icon-speedometer"></i> <i class="fa fa-user"></i> Clientes </a>
               </li>
             <li class="nav-title">
                Usuarios

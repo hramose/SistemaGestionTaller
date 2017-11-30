@@ -25,6 +25,7 @@
                   <th>Telefono</th>
                   <th>Direccion</th>
                   <th>Email</th>
+                  <th>Acciones</th>
                 </thead>
                 <tbody>
                   @foreach ($clientes as $c)
@@ -34,6 +35,14 @@
                       <td>{{$c->telefono_cliente}}</td>
                       <td>{{$c->direccion_cliente}}</td>
                       <td>{{$c->email_cliente}}</td>
+                      <td>
+                        <div class="btn-group btn-group-xs" role="group" aria-label="Toolbar with button groups">
+                          <a href="{{url('cliente/'.$c->id)}}" class="btn btn-primary">Editar</a>
+                         {!! Form::open(['method' => 'DELETE', 'route' => ['clientes.destroy', $c->id] ]) !!}
+                         {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
+                         {!! Form::close() !!}
+                        </div>
+                      </td>
                     </tr>
                   @endforeach
                 </tbody>

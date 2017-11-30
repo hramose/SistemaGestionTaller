@@ -4,6 +4,7 @@ use App\Role;
 use App\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Notify;
 
 class RoleController extends Controller
 {
@@ -45,6 +46,9 @@ class RoleController extends Controller
         if($request->permissions <> ''){
             $role->permissions()->attach($request->permissions);
         }
+
+        Notify::success('', $title = 'Rol creado correctamente', $options = []);
+
         return redirect()->route('roles.index')->with('success','Roles added successfully');
     }
 
@@ -71,6 +75,9 @@ class RoleController extends Controller
         if($request->permissions <> ''){
             $role->permissions()->sync($request->permissions);
         }
+
+        Notify::success('', $title = 'Rol actualizado correctamente', $options = []);
+
         return redirect()->route('roles.index')->with('success','Roles updated successfully');
     }
     /**
@@ -83,6 +90,9 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $role->delete();
+
+        Notify::success('', $title = 'Rol eliminado correctamente', $options = []);
+
         return redirect()->route('roles.index')
             ->with('success',
              'Role deleted successfully!');

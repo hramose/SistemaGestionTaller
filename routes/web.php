@@ -17,6 +17,15 @@ Route::group(['middleware' => ['permission:crear_clientes']], function () {
   Route::post('/clientes', 'ClientesController@store')->name('clientes.store');
 });
 
+Route::group(['middleware' => ['permission:editar_clientes']], function () {
+  Route::get('/cliente/{id}', 'ClientesController@edit')->name('clientes.edit');
+  Route::put('/cliente/{cliente}', 'ClientesController@update')->name('clientes.update');
+});
+
+Route::group(['middleware' => ['permission:eliminar_clientes']], function () {
+  Route::delete('/cliente/{cliente}', 'ClientesController@destroy')->name('clientes.destroy');
+});
+
 Auth::routes();
 
 Route::group( ['middleware' => ['auth']], function() {

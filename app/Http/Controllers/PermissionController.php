@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
+use Notify;
+
 class PermissionController extends Controller
 {
 
@@ -45,6 +47,9 @@ class PermissionController extends Controller
                 $role->permissions()->attach($permission);
             }
         }
+        Notify::success('', $title = 'Permiso creado correctamente', $options = []);
+
+
         return redirect()->route('permissions.index')->with('success','Permission added successfully');
     }
 
@@ -66,6 +71,9 @@ class PermissionController extends Controller
         ]);
         $permission->name=$request->name;
         $permission->save();
+
+        Notify::success('', $title = 'Permiso editado correctamente', $options = []);
+
         return redirect()->route('permissions.index')
             ->with('success',
              'Permission'. $permission->name.' updated!');
@@ -79,6 +87,9 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         $permission->delete();
+
+        Notify::success('', $title = 'Permiso eliminado correctamente', $options = []);
+
         return redirect()->route('permissions.index')
             ->with('success',
              'Permission deleted successfully!');

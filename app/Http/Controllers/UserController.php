@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use App\Permission;
+use Notify;
+
 class UserController extends Controller
 {
     /**
@@ -43,6 +45,9 @@ class UserController extends Controller
         if($request->roles <> ''){
             $user->roles()->attach($request->roles);
         }
+
+        Notify::success('', $title = 'Usuario creado correctamente', $options = []);
+
         return redirect()->route('users.index')->with('success','User has been created');
 
     }
@@ -66,12 +71,18 @@ class UserController extends Controller
         else {
             $user->roles()->detach();
         }
+
+        Notify::success('', $title = 'Usuario editado correctamente', $options = []);
+
         return redirect()->route('users.index')->with('success',
              'User successfully updated.');
     }
     public function destroy($id) {
         $user = User::findOrFail($id);
         $user->delete();
+
+        Notify::success('', $title = 'Usuario eliminado correctamente', $options = []);
+
         return redirect()->route('users.index')->with('success',
              'User successfully deleted.');
     }
