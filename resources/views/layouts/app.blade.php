@@ -27,6 +27,7 @@
   <header class="app-header navbar">
     <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">☰</button>
     <a class="navbar-brand" href="{{ url('/') }}">
+      Taller
     </a>
     <ul class="nav navbar-nav d-md-down-none">
       @guest
@@ -59,6 +60,17 @@
         <ul class="nav">
           @guest
             @else
+              <li class="nav-item">
+                <a class="nav-link   {{ request()->is('/') ? 'active' : '' }}
+                  {{ request()->is('/') ? 'active' : '' }}" href="{{route('dashboard.index')}}" ><i class="icon-speedometer"></i> <i class="fa fa-line-chart"></i> Dashboard </a>
+              </li>
+              <li class="nav-title">
+                 Gestion
+               </li>
+              <li class="nav-item">
+                <a class="nav-link   {{ request()->is('/clientes') ? 'active' : '' }}
+                  {{ request()->is('/clientes') ? 'active' : '' }}" href="{{route('clientes.index')}}" ><i class="icon-speedometer"></i> <i class="fa fa-user"></i> Clientes </a>
+              </li>
             <li class="nav-title">
                Usuarios
              </li>
@@ -93,6 +105,7 @@
 <script type="text/javascript">
   var base_url = '{{ url('/') }}';
 </script>
+
 {!! Notify::render() !!}
 
 </body>
